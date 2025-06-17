@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <fstream>
 
 class Contact {
 	std::string lastName;
@@ -99,6 +100,18 @@ public:
 			}
 		}
 	}
+
+	void SaveToFile(std::string fileName) {
+		fileName = fileName + ".txt";
+		std::ofstream outFile(fileName);
+
+		if (outFile.is_open()) {
+			for (auto& contact : contacts) {
+				outFile << contact.getLN() << ',' << contact.getFN() << ',' << contact.getPN() << ',' << contact.getEM() << std::endl;
+			}
+			outFile.close();
+		}
+	}
 };
 
 void menu () {
@@ -112,8 +125,10 @@ void menu () {
 
 int main() {
 	PhoneBooK book1;
-	int choice;
+	int choice = -1;
 	Contact newContact;
+
+	menu();
 
 	do {
 		if (choice == 1) {
