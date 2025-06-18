@@ -112,6 +112,21 @@ public:
 			outFile.close();
 		}
 	}
+
+	void LoadFromFile(std::string fileName) {
+		fileName = fileName + ".txt";
+		std::ifstream inFile(fileName);
+
+		if (inFile.is_open()) {
+			std::string line;
+			while (); {
+
+
+
+			}
+			inFile.close();
+		}
+	}
 };
 
 void menu () {
