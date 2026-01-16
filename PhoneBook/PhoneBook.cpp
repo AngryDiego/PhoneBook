@@ -1,16 +1,6 @@
-// Нам треба створити проєкт "Телефонна книга". 
-/*
-- два класи - Contact та PhoneBook
-- Contact: поля класу (Прізвище, Ім`я, номер телефону, пошта), сетери з логікою вказування, сеттери, метод??
-- PhoneBook: вектор контактів, можливість додати контакти, можливість знайти за номером телефону/або за прізвищем, показати всі контакти
-- окремий глобальний метод: меню взаємодії
-- перевірка цього проєкту
-
-
-*/
-
 #include <iostream>
 #include <vector>
+#include <fstream>
 
 class Contact {
 	std::string lastName;
@@ -73,6 +63,9 @@ public:
 		setPN(PN);
 		setEmail(EM);
 	}
+	Contact(){
+
+	}
 };
 
 class PhoneBooK {
@@ -107,6 +100,33 @@ public:
 			}
 		}
 	}
+
+	void SaveToFile(std::string fileName) {
+		fileName = fileName + ".txt";
+		std::ofstream outFile(fileName);
+
+		if (outFile.is_open()) {
+			for (auto& contact : contacts) {
+				outFile << contact.getLN() << ',' << contact.getFN() << ',' << contact.getPN() << ',' << contact.getEM() << std::endl;
+			}
+			outFile.close();
+		}
+	}
+
+	void LoadFromFile(std::string fileName) {
+		fileName = fileName + ".txt";
+		std::ifstream inFile(fileName);
+
+		if (inFile.is_open()) {
+			std::string line;
+			while (); {
+
+
+
+			}
+			inFile.close();
+		}
+	}
 };
 
 void menu () {
@@ -120,7 +140,10 @@ void menu () {
 
 int main() {
 	PhoneBooK book1;
-	int choice;
+	int choice = -1;
+	Contact newContact;
+
+	menu();
 
 	do {
 		if (choice == 1) {
@@ -142,17 +165,12 @@ int main() {
 
 			std::cin >> email;
 
-			Contact(lastName, firstName, phonenumber, email);
+			newContact = Contact(lastName, firstName, phonenumber, email);
 		}
 		
 		if (choice == 2){
-			std::string findCont;
-
-			std::cout << "Enter last Contact First name or phonenumber to add to phone-book :" << std::endl;
-
-			std::cin >> findCont;
-
-			book1.AddNumber(book1.FindNumber(findCont));
+			
+			book1.AddNumber(newContact);
 
 		}
 
